@@ -178,19 +178,27 @@ struct ContentView: View {
     
     func calculateResult() {
         secondNumber = Double(displayText) ?? 0
-        switch currentOperation {
-        case "+":
-            displayText = "\(firstNumber + secondNumber)"
-        case "-":
-            displayText = "\(firstNumber - secondNumber)"
-        case "*":
-            displayText = "\(firstNumber * secondNumber)"
-        case "/":
-            displayText = "\(firstNumber / secondNumber)"
-            
-        default:
-            break
-        }
+           var result: Double = 0
+           
+           switch currentOperation {
+           case "+":
+               result = firstNumber + secondNumber
+           case "-":
+               result = firstNumber - secondNumber
+           case "*":
+               result = firstNumber * secondNumber
+           case "/":
+               if secondNumber != 0 {
+                   result = firstNumber / secondNumber
+               } else {
+                   displayText = "Error"
+                   return
+               }
+           default:
+               break
+           }
+           
+           displayText = String(result)
         
     }
     
